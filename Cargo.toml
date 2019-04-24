@@ -6,3 +6,4 @@ edition = "2018"
 
 [dependencies]
 sysinfo = "0.8.2"
+scanner = "0.1.0"

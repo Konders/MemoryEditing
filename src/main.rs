@@ -1,12 +1,21 @@
 use sysinfo::SystemExt;
+use sysinfo::ProcessExt;
+use scanner::pat::{parse, Unit};
+ 
 fn main() {
     let mut system = sysinfo::System::new();
     system.refresh_all();
-    let process = sysinfo::SystemExt::get_process_by_name(&system,"game.exe");
-    //check if we found this process
-    println!("{}",process.len());
-
+    let process = sysinfo::SystemExt::get_process_by_name(&system,"game.exe")[0];
+    let pid = process.pid();
     
+    // let pid = process.pid;
+    //check if we found this process
+    println!("{}",pid);
+    
+    const MY_PATTERN: &'static [Unit] = &[Unit::Byte(0x84), Unit::Byte(0x34),Unit::Byte(0x7E), Unit::Byte(0x76), Unit::Skip(8),Unit::Byte(0x60), Unit::Byte(0x34),Unit::Byte(0x7E), Unit::Byte(0x76),];
+ 
+    let pattern = parse("84 34 7E 76 ?? ?? ?? ?? 60 34 7E 76").unwrap();
+    assert_eq!(pattern, MY_PATTERN);
 }
 
 
