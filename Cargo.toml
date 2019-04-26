@@ -5,5 +5,4 @@ authors = ["Konders <illyashykin5@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-sysinfo = "0.8.2"
-scanner = "0.1.0"
+winapi = { version = "0.3.7", features = ["processthreadsapi", "memoryapi", "handleapi", "winnt", "minwindef", "basetsd", "tlhelp32"] }
